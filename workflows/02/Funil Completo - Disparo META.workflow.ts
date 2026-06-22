@@ -404,9 +404,6 @@ return [{ json: { data: [{ event_name: 'Purchase', event_time: Math.floor(Date.n
     EnviarParaMetaApi = {
         method: 'POST',
         url: 'https://graph.facebook.com/v19.0/SEU_PIXEL_ID/events?access_token=SEU_ACCESS_TOKEN_META',
-        // ⚠️  SEGURANÇA: Substitua SEU_PIXEL_ID e SEU_ACCESS_TOKEN_META pelos valores reais
-        // no painel do n8n usando credenciais gerenciadas ou variáveis de ambiente.
-        // NUNCA comite o token real neste arquivo.
         sendBody: true,
         contentType: 'raw',
         rawContentType: 'application/json',
@@ -423,7 +420,7 @@ return [{ json: { data: [{ event_name: 'Purchase', event_time: Math.floor(Date.n
     })
     EnviarParaDashboard = {
         method: 'POST',
-        url: 'http://crm-dashboard:3000/api/webhook',
+        url: 'http://gtech-crm-dashboard:3000/api/webhook',
         sendBody: true,
         contentType: 'raw',
         rawContentType: 'application/json',
