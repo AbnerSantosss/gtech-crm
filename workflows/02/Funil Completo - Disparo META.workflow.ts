@@ -17,7 +17,7 @@ import { workflow, node, links } from '@n8n-as-code/transformer';
 // ProcessarReuniao                   code
 // ProcessarContrato                  code
 // ProcessarFechado                   code
-// EnviarParaMetaApi                  httpRequest
+// EnviarParaMetaApi                  httpRequest                [onError→regular]
 // EnviarParaDashboard                httpRequest
 //
 // ROUTING MAP
@@ -400,6 +400,7 @@ return [{ json: { data: [{ event_name: 'Purchase', event_time: Math.floor(Date.n
         type: 'n8n-nodes-base.httpRequest',
         version: 4.1,
         position: [1056, -96],
+        onError: 'continueRegularOutput',
     })
     EnviarParaMetaApi = {
         method: 'POST',
