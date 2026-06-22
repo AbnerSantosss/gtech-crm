@@ -113,7 +113,6 @@ Registro cronológico de todas as operações realizadas na wiki. Append-only.
   - `log.md` (este registro)
 
 ## [2026-06-22] update | Redesign UI/UX Pro Max + Regra Frontend
-
 - **Fonte:** `crm-dashboard/src/app/page.tsx`, `crm-dashboard/src/app/globals.css`
 - **Ação:** Redesign completo do Dashboard CRM usando a skill **UI/UX Pro Max**
 - **Design System Aplicado:**
@@ -131,3 +130,22 @@ Registro cronológico de todas as operações realizadas na wiki. Append-only.
 - **Páginas atualizadas:**
   - `conceitos/Dashboard CRM GTech.md`
   - `log.md` (este registro)
+
+## [2026-06-22] deploy | GTech CRM no Portainer + Cloudflare Tunnel
+- **Fonte:** `crm-dashboard/docker-compose.yml` e `workflows/02/Funil Completo - Disparo META.workflow.ts`
+- **Ação:** Deploy da stack do CRM no Portainer, integração na rede Docker local do n8n e exposição pública via Cloudflare.
+- **Modificações de Rede & Infra:**
+  - Stack `gtech-crm-dashboard` implantada e ativa no Portainer com porta host `3001` exposta.
+  - Criada rota pública no Cloudflare Tunnel: `https://crm.proxserverabner.site` -> `http://192.168.3.16:3001`.
+  - Configurado o n8n para entregar leads ao dashboard pela rede interna local: `http://gtech-crm-dashboard:3000/api/webhook`.
+- **Melhorias de Resiliência do Workflow:**
+  - Configurada a propriedade `onError: 'continueRegularOutput'` no nó de envio da Meta Conversions API para evitar falhas em cascata com erro 500 no webhook do CRM em homologação.
+  - Sincronização e resolução de conflito de workflow no n8n via `n8nac resolve --mode keep-current`.
+- **Testes de Integração:**
+  - Realizado teste E2E com disparo bem-sucedido do lead "Sucesso Absoluto" via painel de homologação do CRM, com recebimento no n8n e atualização em tempo real do Kanban.
+- **Páginas atualizadas:**
+  - `workflows/Funil Completo - Disparo META.md`
+  - `conceitos/Dashboard CRM GTech.md`
+  - `log.md` (este registro)
+  - `index.md` (data de atualização modificada)
+

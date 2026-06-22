@@ -88,17 +88,19 @@ Cada nó Code executa a lógica de normalização e enriquecimento de dados de m
 - **Método:** POST
 - **Content-Type:** `application/json`
 - **Body:** `{{ JSON.stringify($json) }}`
+- **Opções de Erro:** `onError: 'continueRegularOutput'` (Ativado para evitar que a falta dos tokens reais em ambiente de homologação ou falhas na API do Facebook interrompam a execução do workflow ou retornem erro 500 para o CRM).
 
-> [!WARNING]
-> **Risco de segurança:** O access token da Meta está embutido diretamente na URL do nó HTTP Request. Isso expõe o token no código-fonte, logs de execução e histórico do Git. Recomenda-se migrar para uma **credencial gerenciada** do tipo `Header Auth` ou `Custom Auth` no n8n, referenciando o token como variável de ambiente.
+> [!NOTE]
+> **Segurança:** O access token da Meta foi removido do código-fonte e do repositório Git, sendo substituído por placeholders de segurança. Para o funcionamento real, o usuário deve preencher as variáveis diretamente no painel administrativo do n8n na nuvem.
 
 ### Envio para Dashboard CRM (HTTP Request)
 
 - **Destino:** [[Dashboard CRM GTech]] (aplicação React/Next.js)
-- **Endpoint:** `http://crm-dashboard:3000/api/webhook`
+- **Endpoint:** `http://gtech-crm-dashboard:3000/api/webhook`
 - **Método:** POST
 - **Content-Type:** `application/json`
 - **Body:** Dados brutos do lead (nome, email, telefone, valor, stage)
+- **Rede Docker:** Conectado à rede `n8n-server_default` sob o container `gtech-crm-dashboard`
 - **Propósito:** Alimentar o painel Kanban com os leads recebidos em tempo real, *antes* da criptografia e envio para a Meta.
 
 ## Configurações do Workflow

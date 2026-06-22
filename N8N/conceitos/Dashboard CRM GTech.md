@@ -79,17 +79,20 @@ graph TD
 }
 ```
 
-## Deploy
+## Deploy e Exposição Pública
 
-O projeto está preparado para deploy via **Docker/Portainer** usando GitHub como fonte:
+O projeto está implantado no **Portainer** usando o repositório Git como fonte:
 
-- **Dockerfile:** Build multi-stage com Node 18 Alpine
-- **docker-compose.yml:** Serviço `crm-dashboard` na porta 3000
-- **Container name:** `gtech-crm-dashboard`
-- **Persistência:** Volume montado em `data.json`
+- **Dockerfile:** Build multi-stage otimizado (standalone output do Next.js).
+- **docker-compose.yml:** Serviço `crm-dashboard` conectado à rede Docker compartilhada `n8n-server_default`.
+- **Mapeamento de Portas:** `3001:3000` (porta 3001 exposta no host, 3000 interna).
+- **Nome do Container:** `gtech-crm-dashboard`
+- **Persistência:** Volume `crm_data` montado em `/app/data` (salva o banco de leads `data.json`).
+- **Túnel Cloudflare (Cloudflare Tunnel):** Exposto publicamente de forma segura através da rota:
+  - **URL Pública:** `https://crm.proxserverabner.site` -> aponta para o IP local `http://192.168.3.16:3001`.
 
 > [!IMPORTANT]
-> O nó "Enviar para Dashboard" no n8n usa a URL `http://crm-dashboard:3000/api/webhook`. Isso pressupõe que o container do Dashboard e o n8n estão na **mesma rede Docker**. Se não estiverem, a URL precisará ser ajustada para o domínio público do Dashboard.
+> O nó "Enviar para Dashboard" no n8n está configurado para entregar os dados usando a URL interna da rede Docker: `http://gtech-crm-dashboard:3000/api/webhook`. Isso evita latência externa e protege o tráfego dos leads.
 
 ## Páginas Relacionadas
 
