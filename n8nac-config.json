@@ -1,0 +1,24 @@
+{
+  "version": 4,
+  "activeEnvironmentId": "02-2",
+  "environmentTargets": [
+    {
+      "id": "02",
+      "name": "02",
+      "kind": "external-instance",
+      "url": "https://n8n.proxserverabner.site"
+    }
+  ],
+  "environments": [
+    {
+      "id": "02-2",
+      "name": "02",
+      "syncSlug": "02",
+      "environmentTargetId": "02",
+      "projectId": "personal",
+      "projectName": "Personal",
+      "workflowsPath": "workflows/02",
+      "folderSync": true
+    }
+  ]
+}

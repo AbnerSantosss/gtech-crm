@@ -1,0 +1,73 @@
+# ═══════════════════════════════════════════════════════
+# SEGURANÇA — NUNCA SUBIR AO GITHUB
+# ═══════════════════════════════════════════════════════
+
+# Variáveis de ambiente e segredos
+.env
+.env.local
+.env.production
+.env.production.local
+.env.development.local
+.env.test.local
+*.env
+secrets/
+secrets.json
+credentials.json
+
+# Dados de leads e produção (LGPD)
+crm-dashboard/data.json
+crm-dashboard/data/
+**/data.json
+
+# Credenciais n8n e manager
+~/.n8n/
+.n8n-manager/
+n8nac-secrets.*
+n8nac.credentials.*
+
+# ═══════════════════════════════════════════════════════
+# NODE / NPM
+# ═══════════════════════════════════════════════════════
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+
+# ═══════════════════════════════════════════════════════
+# NEXT.JS
+# ═══════════════════════════════════════════════════════
+crm-dashboard/.next/
+crm-dashboard/out/
+crm-dashboard/build/
+crm-dashboard/.vercel
+
+# ═══════════════════════════════════════════════════════
+# SISTEMA OPERACIONAL
+# ═══════════════════════════════════════════════════════
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ═══════════════════════════════════════════════════════
+# EDITORES E IDEs
+# ═══════════════════════════════════════════════════════
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ═══════════════════════════════════════════════════════
+# LOGS
+# ═══════════════════════════════════════════════════════
+*.log
+logs/
