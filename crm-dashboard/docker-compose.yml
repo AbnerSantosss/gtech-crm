@@ -6,11 +6,22 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: gtech-crm-dashboard
-    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3001:3000"          # porta 3001 no host → 3000 no container
+    volumes:
+      - crm_data:/app/data   # persistência dos leads
     environment:
       - NODE_ENV=production
-    volumes:
-      # Mount data.json to persist leads across restarts
-      - ./data.json:/app/data.json
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - n8n_net              # mesma rede do n8n para comunicação interna
+
+volumes:
+  crm_data:
+    driver: local
+
+networks:
+  n8n_net:
+    external: true
+    name: n8n-server_default  # rede onde o container do n8n já está rodando
