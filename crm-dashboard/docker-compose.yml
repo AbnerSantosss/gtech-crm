@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  crm-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gtech-crm-dashboard
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Mount data.json to persist leads across restarts
+      - ./data.json:/app/data.json
