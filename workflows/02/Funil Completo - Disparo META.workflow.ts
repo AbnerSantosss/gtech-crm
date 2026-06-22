@@ -425,7 +425,7 @@ return [{ json: { data: [{ event_name: 'Purchase', event_time: Math.floor(Date.n
         sendBody: true,
         contentType: 'raw',
         rawContentType: 'application/json',
-        body: '={{ JSON.stringify($json.body || $json) }}',
+        body: "={{ JSON.stringify({ ...(Object.assign({}, $json.body || $json)), stage: ($json.body?.stage || $json.stage || (() => { const p = $json.webhookPath || $json.params?.path || ''; return p.includes('aquecimento') ? 'CRM_Aquecimento' : p.includes('reuniao') ? 'CRM_Reuniao' : p.includes('contrato') ? 'CRM_Contrato' : p.includes('fechado') ? 'Purchase' : 'CRM_Qualificacao'; })()) }) }}",
         options: {},
     };
 
